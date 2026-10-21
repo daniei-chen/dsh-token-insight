@@ -238,7 +238,7 @@ If any check fails, see the table below.
 | `/usage-stats/api` 404 | plugin not loaded / wrong profile / wrong port | verify profile bundle, restart, find correct Web GUI port |
 | Settings shows two sections | old `@dsh-external/dsh-usage-stats` still loaded | remove old dep/bundle, delete old `node_modules` entry, restart DSH |
 | `totalTokens` is 0 | no local sessions or no local usage | run a DSH task; check `~/.dsh/sessions/**/*.zstd` |
-| `0 轮消息` in heatmap tooltip | host process still running pre-0.4.0 code | full restart DSH |
+| `0 轮消息` in heatmap tooltip | host process still running pre-0.5.0 code | full restart DSH |
 | Ring/trend empty after switching range | data range has no usage | switch 7/30; `dayModels` only contains the selected range |
 | App cannot connect | app-side host plugin / Relay not installed | follow the app repo's install guide |
 
@@ -260,7 +260,8 @@ Uninstall:
 1. Remove `dsh-token-insight` from profile `dependencies` and `dsh.profile.bundles`.
 2. Delete `~/.dsh/profiles/desktop/node_modules/dsh-token-insight`.
 3. Restart DSH.
-4. Optional: delete `~/.dsh/dsh-usage-stats/session-cache.json`.
+4. Optional: delete `~/.dsh/dsh-usage-stats/session-cache.sqlite` and the legacy
+   `~/.dsh/dsh-usage-stats/session-cache.json`.
 
 Do not delete `~/.dsh/sessions` or the billing/ledger files during uninstall.
 
@@ -270,7 +271,8 @@ Do not delete `~/.dsh/sessions` or the billing/ledger files during uninstall.
 
 - Never delete or rewrite files under `~/.dsh/sessions`, `~/.dsh/storages`, or the user's profile
   without a backup.
-- Do not commit `node_modules`, `.env`, credentials, `session-cache.json`, or real user data.
+- Do not commit `node_modules`, `.env`, credentials, `session-cache.sqlite`, `session-cache.json`,
+  or real user data.
 - Keep the package name, `cordis.patch.yml` entry id, client `__ModuleLoader__.load` id, and
   `lib/index.js` `name` all equal to `dsh-token-insight`.
 - A full DSH restart is required after host-side changes; browser refresh alone is not enough.

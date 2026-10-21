@@ -17,6 +17,9 @@ All data comes from the local `~/.dsh` directory — no cloud, no telemetry.
 - **每日 Token 趋势**：7 / 30 天 / 全部，平滑曲线，按模型分色，悬停显示日期、总量和模型明细
 - **模型用量**：环形图 + 明细列表，跟随 7 / 30 天 / 全部范围
 - **数据覆盖提示**：显示本地记录的实际起止日期，缺档时不会误看成统计漏算
+- **今日 / 本周 / 缓存命中率**：在覆盖信息下方直接展示
+- **会话 Top 5 + 导出**：按会话查看用量，支持导出 CSV / JSON / PNG
+- **日预算**：可设置每日 Token 预算，超预算时提示；只存本机 localStorage
 - **纯本地、只读、无遥测**：不上传会话内容，不需要账号或 API key
 
 ## 环境要求
@@ -143,7 +146,7 @@ node -e "console.log(require.resolve('dsh-token-insight/client'))"
 - `~/.dsh/storages/web-billing.json`：旧版本日汇总（按天去重补全）
 - `~/.dsh/storages/cost-meter/ledger.json`：cost-meter 日汇总（按天去重补全）
 
-扫描结果按会话文件 mtime/size 增量缓存到 `~/.dsh/dsh-usage-stats/session-cache.json`。
+扫描结果按会话文件 mtime/size 增量缓存到 `~/.dsh/dsh-usage-stats/session-cache.sqlite`（旧版 `session-cache.json` 会自动迁移）。
 插件只读这些本地文件，不发起网络请求，不上传任何内容。
 
 ## 数据口径
@@ -170,7 +173,8 @@ node scripts/install.mjs --profile desktop
    `dsh.profile.bundles` 都要删）
 2. 删除 `~/.dsh/profiles/desktop/node_modules/dsh-token-insight`
 3. 重启 DSH
-4. 可选：删除缓存 `~/.dsh/dsh-usage-stats/session-cache.json`
+4. 可选：删除缓存 `~/.dsh/dsh-usage-stats/session-cache.sqlite` 和旧的
+   `~/.dsh/dsh-usage-stats/session-cache.json`
 
 ## 常见问题
 
@@ -195,7 +199,8 @@ npm pack                                       # 重新打包
 
 ## API
 
-`GET /usage-stats/api?days=7|30|all` 返回统计 JSON。
+`GET /usage-stats/api?days=7|30|all` 返回统计 JSON，包含累计/峰值/连续天数、模型明细、
+`cacheHitRate`、`todayTokens`、`weekTokens`、`sessionsTop` 和 `coverage`。
 
 ## License
 
