@@ -14,8 +14,9 @@ All data comes from the local `~/.dsh` directory — no cloud, no telemetry.
 
 - **5 个总览指标**：累计 Token、峰值 Token、最长聊天时长、当前连续天数、最长连续天数
 - **Token 活动热力图**：最近 52 周，每日 / 每周 / 累计三种模式
-- **每日 Token 趋势**：7 / 30 天平滑曲线，按模型分色，悬停显示日期、总量和模型明细
-- **模型用量**：环形图 + 明细列表，跟随 7 / 30 天范围
+- **每日 Token 趋势**：7 / 30 天 / 全部，平滑曲线，按模型分色，悬停显示日期、总量和模型明细
+- **模型用量**：环形图 + 明细列表，跟随 7 / 30 天 / 全部范围
+- **数据覆盖提示**：显示本地记录的实际起止日期，缺档时不会误看成统计漏算
 - **纯本地、只读、无遥测**：不上传会话内容，不需要账号或 API key
 
 ## 环境要求
@@ -48,7 +49,7 @@ node scripts/install.mjs --profile desktop
 ### 方式 B：DSH 插件管理器
 
 打开 DSH → **插件** → **添加插件** → **第三方插件** → 选择本仓库目录或 `npm pack` 生成的
-`dsh-token-insight-0.4.0.tgz` → 安装 → 重启 DSH。
+`dsh-token-insight-0.5.0.tgz` → 安装 → 重启 DSH。
 
 ### 方式 C：手动安装（没有脚本时）
 
@@ -194,7 +195,7 @@ npm pack                                       # 重新打包
 
 ## API
 
-`GET /usage-stats/api?days=7|30` 返回统计 JSON。
+`GET /usage-stats/api?days=7|30|all` 返回统计 JSON。
 
 ## License
 
