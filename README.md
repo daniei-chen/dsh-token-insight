@@ -20,6 +20,7 @@ All data comes from the local `~/.dsh` directory — no cloud, no telemetry.
 - **今日 / 本周 / 缓存命中率**：在覆盖信息下方直接展示
 - **会话 Top 5 + 导出**：按会话查看用量，支持导出 CSV / JSON / PNG
 - **日预算**：可设置每日 Token 预算，超预算时提示；只存本机 localStorage
+- **历史计费**：从旧的 billing / cost-meter 记录补出部分费用，并明确标注“部分”
 - **纯本地、只读、无遥测**：不上传会话内容，不需要账号或 API key
 
 ## 环境要求

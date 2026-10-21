@@ -50,7 +50,8 @@
     "install:profile": "node scripts/install.mjs",
     "sync": "node sync.mjs",
     "check": "node --check lib/client.js && node --check lib/index.js",
-    "test": "node --test test/*.test.mjs"
+    "test": "node --test test/*.test.mjs",
+    "verify": "npm run check && npm test"
   },
   "license": "MIT"
 }
