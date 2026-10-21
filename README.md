@@ -55,7 +55,15 @@ node scripts/install.mjs --profile desktop
 打开 DSH → **插件** → **添加插件** → **第三方插件** → 选择本仓库目录或 `npm pack` 生成的
 `dsh-token-insight-0.5.0.tgz` → 安装 → 重启 DSH。
 
-### 方式 C：手动安装（没有脚本时）
+### 方式 C：GitHub Release
+
+不克隆仓库时，直接下载：
+
+[**dsh-token-insight-0.5.0.tgz**](https://github.com/daniei-chen/dsh-token-insight/releases/download/v0.5.0/dsh-token-insight-0.5.0.tgz)
+
+在 DSH 插件管理器的“第三方插件”里选择这个 tgz，或解压到 profile 的 `node_modules/dsh-token-insight`。
+
+### 方式 D：手动安装（没有脚本时）
 
 编辑 `~/.dsh/profiles/desktop/package.json`：
 
