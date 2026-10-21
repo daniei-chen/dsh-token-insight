@@ -206,3 +206,10 @@ npm pack                                       # 重新打包
 ## License
 
 MIT
+
+## 相关文档
+
+- [AI 安装指南](docs/INSTALL_FOR_AGENTS.md)
+- [CI / 验证](docs/CI.md)
+- [npm 发布](docs/PUBLISH.md)
+- [CHANGELOG](CHANGELOG.md)
