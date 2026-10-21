@@ -1,0 +1,50 @@
+{
+  "name": "dsh-token-insight",
+  "version": "0.4.0",
+  "description": "Local-first token usage dashboard for DeepSeek Harness (DSH): lifetime/peak tokens, streaks, 52-week heatmap, daily trends and model breakdown.",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./locale/en.json": "./locale/en.json",
+    "./locale/zh.json": "./locale/zh.json",
+    "./locale/*": "./locale/*",
+    "./package.json": "./package.json"
+  },
+  "dsh": {
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-runtime",
+        "@deepseek-ai/dsh-client-ui-settings"
+      ]
+    },
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "compatibility": {
+      "dshReleases": {
+        "0.2.1-rc.2": "compatible"
+      }
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daniei-chen/dsh-token-insight.git"
+  },
+  "homepage": "https://github.com/daniei-chen/dsh-token-insight#readme",
+  "bugs": {
+    "url": "https://github.com/daniei-chen/dsh-token-insight/issues"
+  },
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "usage-stats",
+    "token-usage",
+    "dashboard",
+    "local-first"
+  ],
+  "license": "MIT"
+}
