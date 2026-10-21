@@ -46,5 +46,10 @@
     "dashboard",
     "local-first"
   ],
+  "scripts": {
+    "install:profile": "node scripts/install.mjs",
+    "sync": "node sync.mjs",
+    "check": "node --check lib/client.js && node --check lib/index.js"
+  },
   "license": "MIT"
 }
