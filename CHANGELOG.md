@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.5.1
+
+- Move the hover tooltip to `document.body` so themes that transform/backdrop-filter dialogs
+  (for example Catppuccin glass) cannot trap or clip it.
+- Add native `title` fallbacks on heatmap cells, trend buckets and model ring segments.
+- Convert React tooltip content to readable multi-line text for the body-level tooltip.
+- Keep tooltips above the settings dialog with a dedicated top z-index.
+
 ## 0.5.0
 
 - Add `days=all` / `全部` range for the trend and model charts.
