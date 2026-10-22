@@ -1,0 +1,126 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="660" viewBox="0 0 1200 660" role="img" aria-label="DSH Token Insight architecture">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#6B7C93"/>
+    </marker>
+    <marker id="arrowBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#4C8DFF"/>
+    </marker>
+    <linearGradient id="hostBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#EEF5FF"/>
+      <stop offset="1" stop-color="#F3F8FF"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#1B2A41" flood-opacity="0.08"/>
+    </filter>
+    <style>
+      .t { font-family: Inter, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; }
+      .title { font-size: 26px; font-weight: 700; fill: #162033; }
+      .sub { font-size: 13px; fill: #6B7C93; }
+      .box { fill: #FFFFFF; stroke: #DDE5F0; stroke-width: 1.2; }
+      .box-title { font-size: 14px; font-weight: 650; fill: #162033; }
+      .box-text { font-size: 11.5px; fill: #6B7C93; }
+      .chip { font-size: 10.5px; fill: #4C8DFF; }
+      .group-title { font-size: 12px; font-weight: 700; fill: #4C8DFF; letter-spacing: 1.5px; }
+      .arrow { stroke: #6B7C93; stroke-width: 1.6; fill: none; }
+      .arrow-blue { stroke: #4C8DFF; stroke-width: 2; fill: none; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="660" fill="#F7F9FC"/>
+  <text x="56" y="60" class="t title">DSH Token Insight 数据流</text>
+  <text x="56" y="86" class="t sub">本地文件 → 增量解析 → SQLite 缓存 → 统计 API → 设置页</text>
+
+  <!-- data sources -->
+  <text x="56" y="140" class="t group-title">DATA SOURCES</text>
+
+  <g filter="url(#shadow)">
+    <rect x="56" y="160" width="236" height="86" rx="14" class="box"/>
+    <rect x="72" y="176" width="30" height="30" rx="8" fill="#E8F1FF"/>
+    <text x="87" y="197" text-anchor="middle" class="t" font-size="14">📦</text>
+    <text x="116" y="184" class="t box-title">sessions/**/*.zstd</text>
+    <text x="116" y="204" class="t box-text">当前版本会话记录</text>
+    <text x="116" y="222" class="t box-text">assistant/message · usage</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="56" y="264" width="236" height="86" rx="14" class="box"/>
+    <rect x="72" y="280" width="30" height="30" rx="8" fill="#EAFBF3"/>
+    <text x="87" y="301" text-anchor="middle" class="t" font-size="14">🧾</text>
+    <text x="116" y="288" class="t box-title">web-billing.json</text>
+    <text x="116" y="308" class="t box-text">旧版日汇总</text>
+    <text x="116" y="326" class="t box-text">补全 sessions 之前的日期</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="56" y="368" width="236" height="86" rx="14" class="box"/>
+    <rect x="72" y="384" width="30" height="30" rx="8" fill="#FFF6E6"/>
+    <text x="87" y="405" text-anchor="middle" class="t" font-size="14">📊</text>
+    <text x="116" y="392" class="t box-title">cost-meter/ledger.json</text>
+    <text x="116" y="412" class="t box-text">cost-meter 日汇总</text>
+    <text x="116" y="430" class="t box-text">补全 + 历史计费</text>
+  </g>
+
+  <!-- host group -->
+  <rect x="360" y="112" width="454" height="430" rx="22" fill="url(#hostBg)" stroke="#CFE0FB" stroke-width="1.5"/>
+  <text x="386" y="144" class="t group-title">HOST PLUGIN · lib/index.js</text>
+  <text x="386" y="168" class="t sub">注册 /usage-stats/api，只读本地文件</text>
+
+  <g filter="url(#shadow)">
+    <rect x="386" y="188" width="402" height="70" rx="14" class="box"/>
+    <text x="406" y="215" class="t box-title">1. 多帧 zstd 解码</text>
+    <text x="406" y="236" class="t box-text">扫描 28 B5 2F FD，逐帧解压；session/title、usage、turn 时长</text>
+  </g>
+  <path d="M386 258V276" class="arrow" marker-end="url(#arrow)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="386" y="278" width="402" height="82" rx="14" class="box"/>
+    <text x="406" y="305" class="t box-title">2. 增量扫描 + SQLite 缓存</text>
+    <text x="406" y="326" class="t box-text">按 mtime/size 跳过未变化文件</text>
+    <text x="406" y="344" class="t box-text">session-cache.sqlite · 旧 JSON 自动迁移</text>
+  </g>
+  <path d="M386 360V378" class="arrow" marker-end="url(#arrow)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="386" y="380" width="402" height="88" rx="14" class="box"/>
+    <text x="406" y="407" class="t box-title">3. 合并 + 聚合</text>
+    <text x="406" y="428" class="t box-text">按天取 max(sessions, billing, ledger)，避免重复</text>
+    <text x="406" y="446" class="t box-text">累计 / 峰值 / 连续天数 / 模型 / 缓存命中 / 会话 Top 5</text>
+  </g>
+  <path d="M386 468V486" class="arrow" marker-end="url(#arrow)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="386" y="488" width="402" height="42" rx="12" fill="#162033" stroke="#162033"/>
+    <text x="406" y="514" class="t" font-size="13" font-weight="650" fill="#FFFFFF">GET /usage-stats/api?days=7 | 30 | all</text>
+    <circle cx="768" cy="509" r="4" fill="#34D399"/>
+  </g>
+
+  <!-- arrows from sources to host -->
+  <path d="M292 203 C330 203 334 220 380 220" class="arrow-blue" marker-end="url(#arrowBlue)"/>
+  <path d="M292 307 C330 307 334 310 380 310" class="arrow-blue" marker-end="url(#arrowBlue)"/>
+  <path d="M292 411 C330 411 334 400 380 400" class="arrow-blue" marker-end="url(#arrowBlue)"/>
+
+  <!-- client -->
+  <text x="880" y="140" class="t group-title">CLIENT · lib/client.js</text>
+  <g filter="url(#shadow)">
+    <rect x="880" y="160" width="264" height="286" rx="18" class="box"/>
+    <rect x="900" y="178" width="224" height="34" rx="9" fill="#F1F5FB"/>
+    <text x="916" y="200" class="t" font-size="12" font-weight="650" fill="#162033">设置 → 使用统计</text>
+    <text x="900" y="238" class="t" font-size="12" fill="#162033">5 个指标卡</text>
+    <text x="900" y="262" class="t" font-size="12" fill="#162033">52 周热力图</text>
+    <text x="900" y="286" class="t" font-size="12" fill="#162033">每日趋势 + 模型环</text>
+    <text x="900" y="310" class="t" font-size="12" fill="#162033">会话 Top 5</text>
+    <text x="900" y="334" class="t" font-size="12" fill="#162033">CSV / JSON / PNG 导出</text>
+    <text x="900" y="358" class="t" font-size="12" fill="#162033">日预算 / 历史计费</text>
+    <rect x="900" y="382" width="224" height="42" rx="9" fill="#EEF8F2"/>
+    <text x="916" y="408" class="t" font-size="11.5" fill="#237A4B">只读 · 无网络 · 无遥测</text>
+  </g>
+  <path d="M788 509 C838 509 842 303 876 303" class="arrow-blue" marker-end="url(#arrowBlue)"/>
+  <text x="800" y="492" class="t" font-size="10.5" fill="#4C8DFF">JSON</text>
+
+  <!-- footer -->
+  <g class="t" font-size="11.5" fill="#8494AE">
+    <text x="56" y="604">所有解析在 DSH host 进程内完成；客户端只消费统计结果。</text>
+    <text x="56" y="624">数据不离开本机。删除插件不会删除 ~/.dsh/sessions 或 storages。</text>
+  </g>
+</svg>
