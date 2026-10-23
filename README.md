@@ -7,9 +7,9 @@
 **把每一颗 token，都看得清清楚楚。**
 
 DeepSeek Harness（DSH）的本地使用统计插件：累计/峰值 Token、连续天数、52 周热力图、
-每日趋势、模型用量、会话 Top 5、成本与导出。
+每日趋势、模型用量、会话 Top 5、成本与缓存命中。
 
-[![version](https://img.shields.io/badge/version-0.5.1-4C8DFF?style=flat-square)](CHANGELOG.md)
+[![version](https://img.shields.io/badge/version-0.5.2-4C8DFF?style=flat-square)](CHANGELOG.md)
 [![DSH](https://img.shields.io/badge/DSH-0.2.1--rc.2%2B-22C55E?style=flat-square)](https://github.com/daniei-chen/DeepSeek-Harness-APP)
 [![Node](https://img.shields.io/badge/Node-24-339933?style=flat-square&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
 [![license](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](LICENSE)
@@ -39,7 +39,7 @@ DSH Token Insight 是一个装在 **DSH host** 上的本地插件。安装后，
 
 ![使用统计面板](docs/screenshot.png)
 
-> 桌面端截图；手机端 52 周热力图比屏幕宽，**可左右滑动**，并会自动定位到最近几周。
+> 桌面端截图（0.5.1）；0.5.2 已移除底部导出按钮和日预算输入，界面更简洁。手机端 52 周热力图比屏幕宽，**可左右滑动**，并会自动定位到最近几周。
 
 ## 功能一览
 
@@ -51,9 +51,8 @@ DSH Token Insight 是一个装在 **DSH host** 上的本地插件。安装后，
 | **模型用量** | 环形图 + 明细列表；图例点击隐藏模型，环形图点击筛选 |
 | **数据覆盖** | 实际起止日期；今日、本周、缓存命中率 |
 | **会话 Top 5** | 会话标题、Token、时长；快速看出谁最“费 token” |
-| **导出** | CSV / JSON / PNG，方便存档或发群 |
-| **日预算** | 本机 localStorage；超预算提示，不影响统计 |
 | **历史计费** | 从旧 `web-billing` / `cost-meter` 补出部分费用，并标注“部分” |
+| **刷新** | 手动重新扫描本地会话；进入页面和切换范围时也会自动加载 |
 | **主题适配** | 跟随 DSH 深色/浅色主题；手机端横向滚动、骨架屏 |
 
 ## 快速开始
@@ -80,7 +79,7 @@ node scripts/install.mjs --profile desktop
 
 **GitHub Release 下载：**
 
-[dsh-token-insight-0.5.1.tgz](https://github.com/daniei-chen/dsh-token-insight/releases/download/v0.5.1/dsh-token-insight-0.5.1.tgz)
+[dsh-token-insight-0.5.2.tgz](https://github.com/daniei-chen/dsh-token-insight/releases/download/v0.5.2/dsh-token-insight-0.5.2.tgz)
 
 在 DSH 插件管理器里选择这个 tgz，或解压到
 `~/.dsh/profiles/desktop/node_modules/dsh-token-insight`。
@@ -145,13 +144,12 @@ flowchart LR
 1. **总览卡**：累计 / 峰值 / 最长聊天 / 当前连续 / 最长连续，全部时间口径
 2. **数据覆盖**：`2026-08-13 ~ 2026-10-22 · 本地会话`
 3. **今日 / 本周 / 缓存命中 / 历史计费**：一行看清近期状态
-4. **日预算**：输入数字后，显示今日已用百分比
-5. **Token 活动**：52 周热力图，可切换每日 / 每周 / 累计
-6. **时间范围**：近 7 日 / 近 30 日 / 全部
-7. **每日 Token 趋势图**：按模型分色，图例可点击隐藏
-8. **模型用量**：环形图 + 明细列表
-9. **会话用量 Top 5**：按会话看 Token 和时长
-10. **导出 / 刷新**：CSV、JSON、PNG
+4. **Token 活动**：52 周热力图，可切换每日 / 每周 / 累计
+5. **时间范围**：近 7 日 / 近 30 日 / 全部
+6. **每日 Token 趋势图**：按模型分色，图例可点击隐藏
+7. **模型用量**：环形图 + 明细列表
+8. **会话用量 Top 5**：按会话看 Token 和时长
+9. **刷新**：手动重新读取本地统计
 
 ## 数据流
 
@@ -218,7 +216,7 @@ node -e "console.log(require.resolve('dsh-token-insight/client'))"
 # 2. API 正常（端口换成 DSH Web GUI 端口）
 curl "http://127.0.0.1:<port>/usage-stats/api?days=30"
 
-# 3. 全部范围（0.5.1 新 host）
+# 3. 全部范围（0.5.2 新 host）
 curl "http://127.0.0.1:<port>/usage-stats/api?days=all"
 ```
 
@@ -253,7 +251,7 @@ curl "http://127.0.0.1:<port>/usage-stats/api?days=all"
 | 设置里同时出现「DSH 使用统计」和「使用统计」 | 旧包 `@dsh-external/dsh-usage-stats` 还在运行中的进程里；确认 profile 只剩 `dsh-token-insight`，**完整重启 DSH** |
 | 插件列表还有旧「DSH 使用统计」 | 同上；删除旧 `node_modules/@dsh-external/dsh-usage-stats` 后重启 |
 | 热力图显示 `0 轮消息` | host 还是旧版；完整重启 DSH |
-| 手机端热力图看起来是空的 | 数据在 52 周网格右侧；0.5.1 会自动滚到最近几周，也可以左右滑动 |
+| 手机端热力图看起来是空的 | 数据在 52 周网格右侧；会自动滚到最近几周，也可以左右滑动 |
 | `/usage-stats/api` 404 | 插件没加载、profile 不对，或端口不是 DSH Web GUI 端口 |
 | `Cannot find module 'node:sqlite'` | DSH runtime Node 低于 22.5；升级到 Node 24 的 DSH |
 | 没有数据 | 确认 `~/.dsh/sessions` 有 `.zstd`；先在 DSH 里跑几个任务 |
@@ -325,6 +323,7 @@ dsh-token-insight/
 
 - [x] 0.5.0：全部范围、数据覆盖、缓存命中、会话 Top 5、导出、预算、SQLite 缓存
 - [x] 0.5.1：tooltip 挂 body，兼容 Catppuccin glass 等会 transform 弹窗的主题
+- [x] 0.5.2：移除导出和日预算，保留刷新，界面更专注
 - [ ] 0.6：真实成本账本（按模型单价、缓存节省）
 - [ ] 0.6：会话下钻（点击 Top 5 / 峰值日期看明细）
 - [ ] 0.6：今日常驻小部件（侧边栏 / 桌宠气泡）

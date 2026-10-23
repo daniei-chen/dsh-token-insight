@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.5.2
+
+- Remove the CSV / JSON / PNG export buttons; the dashboard is read-only again.
+- Remove the local daily budget input and its percentage hint.
+- Keep the manual refresh button and all host / API behavior unchanged.
+
 ## 0.5.1
 
 - Move the hover tooltip to `document.body` so themes that transform/backdrop-filter dialogs

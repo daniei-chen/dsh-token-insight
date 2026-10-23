@@ -110,8 +110,8 @@
     <text x="900" y="262" class="t" font-size="12" fill="#162033">52 周热力图</text>
     <text x="900" y="286" class="t" font-size="12" fill="#162033">每日趋势 + 模型环</text>
     <text x="900" y="310" class="t" font-size="12" fill="#162033">会话 Top 5</text>
-    <text x="900" y="334" class="t" font-size="12" fill="#162033">CSV / JSON / PNG 导出</text>
-    <text x="900" y="358" class="t" font-size="12" fill="#162033">日预算 / 历史计费</text>
+    <text x="900" y="334" class="t" font-size="12" fill="#162033">今日 · 本周 / 缓存命中</text>
+    <text x="900" y="358" class="t" font-size="12" fill="#162033">历史计费 / 手动刷新</text>
     <rect x="900" y="382" width="224" height="42" rx="9" fill="#EEF8F2"/>
     <text x="916" y="408" class="t" font-size="11.5" fill="#237A4B">只读 · 无网络 · 无遥测</text>
   </g>
