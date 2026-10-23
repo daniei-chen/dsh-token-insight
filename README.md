@@ -9,7 +9,7 @@
 DeepSeek Harness（DSH）的本地使用统计插件：累计/峰值 Token、连续天数、52 周热力图、
 每日趋势、模型用量、会话排行、成本与缓存命中。
 
-[![version](https://img.shields.io/badge/version-0.5.8-4C8DFF?style=flat-square)](CHANGELOG.md)
+[![version](https://img.shields.io/badge/version-0.5.9-4C8DFF?style=flat-square)](CHANGELOG.md)
 [![DSH](https://img.shields.io/badge/DSH-0.2.1--rc.2%2B-22C55E?style=flat-square)](https://github.com/daniei-chen/DeepSeek-Harness-APP)
 [![Node](https://img.shields.io/badge/Node-24-339933?style=flat-square&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
 [![license](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](LICENSE)
@@ -39,7 +39,7 @@ DSH Token Insight 是一个装在 **DSH host** 上的本地插件。安装后，
 
 ![使用统计面板](docs/screenshot.png)
 
-> 桌面端截图（0.5.1）；0.5.2 起移除导出和日预算，0.5.3 把版本提示移到底部，0.5.4 把数据覆盖和今日/本周信息也移到底部，0.5.5 给刷新按钮加了旋转加载态并上移了加载文案，0.5.6 增加会话排行和翻页，0.5.7 加了内存缓存，0.5.8 统一整页刷新并补齐失败重试、token 构成和计费来源。手机端 52 周热力图比屏幕宽，**可左右滑动**，并会自动定位到最近几周。
+> 桌面端截图（0.5.1）；0.5.2 起移除导出和日预算，0.5.3 把版本提示移到底部，0.5.4 把数据覆盖和今日/本周信息也移到底部，0.5.5 给刷新按钮加了旋转加载态并上移了加载文案，0.5.6 增加会话排行和翻页，0.5.7 加了内存缓存，0.5.8 统一整页刷新并补齐失败重试、token 构成和计费来源，0.5.9 默认近 7 日和选中高亮。手机端 52 周热力图比屏幕宽，**可左右滑动**，并会自动定位到最近几周。
 
 ## 功能一览
 
@@ -47,7 +47,7 @@ DSH Token Insight 是一个装在 **DSH host** 上的本地插件。安装后，
 | --- | --- |
 | **5 个总览指标** | 累计 Token、峰值 Token、最长聊天时长、当前连续天数、最长连续天数 |
 | **52 周热力图** | 每日 / 每周 / 累计三种模式；悬停显示日期、token、轮消息 |
-| **每日趋势** | 近 7 日 / 近 30 日 / 全部；平滑曲线、面积渐变、hover 十字线 |
+| **每日趋势** | 默认近 7 日 / 近 30 日 / 全部；平滑曲线、面积渐变；点击某天固定高亮，再点取消 |
 | **模型用量** | 环形图 + 明细列表；图例点击隐藏模型，环形图点击筛选 |
 | **数据覆盖** | 实际起止日期；今日、本周、缓存命中率（页面底部） |
 | **会话排行** | 跟随近 7 日 / 近 30 日 / 全部；默认 Top 5，点「查看全部」看完整排行，10 条/页可翻页；带缓存读 / 输出占比 |
@@ -79,7 +79,7 @@ node scripts/install.mjs --profile desktop
 
 **GitHub Release 下载：**
 
-[dsh-token-insight-0.5.8.tgz](https://github.com/daniei-chen/dsh-token-insight/releases/download/v0.5.8/dsh-token-insight-0.5.8.tgz)
+[dsh-token-insight-0.5.9.tgz](https://github.com/daniei-chen/dsh-token-insight/releases/download/v0.5.9/dsh-token-insight-0.5.9.tgz)
 
 在 DSH 插件管理器里选择这个 tgz，或解压到
 `~/.dsh/profiles/desktop/node_modules/dsh-token-insight`。
@@ -143,7 +143,7 @@ flowchart LR
 
 1. **总览卡**：累计 / 峰值 / 最长聊天 / 当前连续 / 最长连续，全部时间口径
 2. **Token 活动**：52 周热力图，可切换每日 / 每周 / 累计
-3. **时间范围**：近 7 日 / 近 30 日 / 全部
+3. **时间范围**：默认近 7 日，可切近 30 日 / 全部；选中按钮描边加深
 4. **每日 Token 趋势图**：按模型分色，图例可点击隐藏
 5. **模型用量**：环形图 + 明细列表
 6. **会话用量**：随全局范围切换；默认 Top 5，点「查看全部」后按 10 条/页翻页
@@ -330,6 +330,7 @@ dsh-token-insight/
 - [x] 0.5.6：会话排行按范围统计，支持「查看全部」和 10 条/页翻页
 - [x] 0.5.7：内存缓存合并结果，无变化时热请求约 35ms；预热提前到 2s
 - [x] 0.5.8：整页刷新、失败重试、会话 token 构成、计费来源、无记录天数、图例记忆、跨日测试
+- [x] 0.5.9：默认近 7 日；加载态改为圆圈 +「加载中」；热力图、趋势图、时间范围、模型图例选中高亮
 - [ ] 0.6：真实成本账本（按模型单价、缓存节省）
 - [ ] 0.6：会话下钻（点击 Top 5 / 峰值日期看明细）
 - [ ] 0.6：今日常驻小部件（侧边栏 / 桌宠气泡）

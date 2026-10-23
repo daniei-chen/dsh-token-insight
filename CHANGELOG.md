@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.5.9
+
+- Default the panel to the last 7 days instead of 30.
+- Replace the text loading state with a centered spinner and「加载中」; remove the elapsed-seconds counter.
+- Highlight the selected heatmap cell and restore the previous one when another is clicked.
+- Pin a selected day in the trend chart with a solid crosshair, shaded column, bold axis label and larger dots.
+- Strengthen the selected time-range button and hidden-model legend rows.
+
 ## 0.5.8
 
 - Make refresh update the whole page (stats strip, heatmap, trend, models, sessions and footer).
