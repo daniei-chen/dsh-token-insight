@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.5.6
+
+- Scope the session ranking to the selected range (7 days / 30 days / all).
+- Add「查看全部」to the session card: full ranking, 10 rows per page, with previous / next paging.
+- Expose `sessionsRanking` from the host API; `sessionsTop` remains the first five entries.
+
 ## 0.5.5
 
 - Add a spinning「↻」icon and「正在读取…」label to the refresh button while a scan is running.
