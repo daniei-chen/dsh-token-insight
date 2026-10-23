@@ -9,7 +9,7 @@
 DeepSeek Harness（DSH）的本地使用统计插件：累计/峰值 Token、连续天数、52 周热力图、
 每日趋势、模型用量、会话排行、成本与缓存命中。
 
-[![version](https://img.shields.io/badge/version-0.5.10-4C8DFF?style=flat-square)](CHANGELOG.md)
+[![version](https://img.shields.io/badge/version-0.5.11-4C8DFF?style=flat-square)](CHANGELOG.md)
 [![DSH](https://img.shields.io/badge/DSH-0.2.1--rc.2%2B-22C55E?style=flat-square)](https://github.com/daniei-chen/DeepSeek-Harness-APP)
 [![Node](https://img.shields.io/badge/Node-24-339933?style=flat-square&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
 [![license](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](LICENSE)
@@ -39,7 +39,7 @@ DSH Token Insight 是一个装在 **DSH host** 上的本地插件。安装后，
 
 ![使用统计面板](docs/screenshot.png)
 
-> 桌面端截图（0.5.1）；0.5.2 起移除导出和日预算，0.5.3 把版本提示移到底部，0.5.4 把数据覆盖和今日/本周信息也移到底部，0.5.5 给刷新按钮加了旋转加载态并上移了加载文案，0.5.6 增加会话排行和翻页，0.5.7 加了内存缓存，0.5.8 统一整页刷新并补齐失败重试、token 构成和计费来源，0.5.9 默认近 7 日和选中高亮，0.5.10 选中改蓝色并支持模型聚焦。手机端 52 周热力图比屏幕宽，**可左右滑动**，并会自动定位到最近几周。
+> 桌面端截图（0.5.1）；0.5.2 起移除导出和日预算，0.5.3 把版本提示移到底部，0.5.4 把数据覆盖和今日/本周信息也移到底部，0.5.5 给刷新按钮加了旋转加载态并上移了加载文案，0.5.6 增加会话排行和翻页，0.5.7 加了内存缓存，0.5.8 统一整页刷新并补齐失败重试、token 构成和计费来源，0.5.9 默认近 7 日和选中高亮，0.5.10 选中改蓝色并支持模型聚焦，0.5.11 打开先用上次结果并后台更新。手机端 52 周热力图比屏幕宽，**可左右滑动**，并会自动定位到最近几周。
 
 ## 功能一览
 
@@ -52,7 +52,7 @@ DSH Token Insight 是一个装在 **DSH host** 上的本地插件。安装后，
 | **数据覆盖** | 实际起止日期；今日、本周、缓存命中率（页面底部） |
 | **会话排行** | 跟随近 7 日 / 近 30 日 / 全部；默认 Top 5，点「查看全部」看完整排行，10 条/页可翻页；带缓存读 / 输出占比 |
 | **历史计费** | 从旧 `web-billing` / `cost-meter` 补出部分费用，标注来源和覆盖天数 |
-| **刷新** | 一次刷新整页；点击后图标旋转并显示「正在读取…」；失败时显示轻量重试 |
+| **刷新** | 打开时先显示上次结果并后台更新；手动刷新一次更新整页；失败时轻量重试 |
 | **主题适配** | 跟随 DSH 深色/浅色主题；手机端横向滚动 |
 
 ## 快速开始
@@ -79,7 +79,7 @@ node scripts/install.mjs --profile desktop
 
 **GitHub Release 下载：**
 
-[dsh-token-insight-0.5.10.tgz](https://github.com/daniei-chen/dsh-token-insight/releases/download/v0.5.10/dsh-token-insight-0.5.10.tgz)
+[dsh-token-insight-0.5.11.tgz](https://github.com/daniei-chen/dsh-token-insight/releases/download/v0.5.11/dsh-token-insight-0.5.11.tgz)
 
 在 DSH 插件管理器里选择这个 tgz，或解压到
 `~/.dsh/profiles/desktop/node_modules/dsh-token-insight`。
@@ -332,6 +332,7 @@ dsh-token-insight/
 - [x] 0.5.8：整页刷新、失败重试、会话 token 构成、计费来源、无记录天数、图例记忆、跨日测试
 - [x] 0.5.9：默认近 7 日；加载态改为圆圈 +「加载中」；热力图、趋势图、时间范围、模型图例选中高亮
 - [x] 0.5.10：选中态统一为蓝色；模型用量改为聚焦查看；修复热更新后加载圈不显示
+- [x] 0.5.11：打开先用 `sessionStorage` 上次结果，后台更新，减少等待感
 - [ ] 0.6：真实成本账本（按模型单价、缓存节省）
 - [ ] 0.6：会话下钻（点击 Top 5 / 峰值日期看明细）
 - [ ] 0.6：今日常驻小部件（侧边栏 / 桌宠气泡）

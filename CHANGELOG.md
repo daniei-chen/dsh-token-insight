@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.5.11
+
+- Render the last statistics instantly from `sessionStorage`, then refresh in the background.
+- Keep the cached view when a background refresh fails and show a lightweight retry line.
+- Show「更新中…」in the footer while the background request is running.
+
 ## 0.5.10
 
 - Use the theme blue for selected heatmap cells, range buttons, trend crosshair, shaded column, axis label and dots.
