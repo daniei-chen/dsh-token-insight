@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.5.13
+
+- Remove native `title` tooltips from heatmap cells, trend buckets and ring segments,
+  so only the styled floating tooltip appears (no overlapping browser tooltip).
+
 ## 0.5.12
 
 - Move the instant-render snapshot cache from `sessionStorage` to `localStorage`,

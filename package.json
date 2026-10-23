@@ -1,6 +1,6 @@
 {
   "name": "dsh-token-insight",
-  "version": "0.5.12",
+  "version": "0.5.13",
   "description": "Local-first token usage dashboard for DeepSeek Harness (DSH): lifetime/peak tokens, streaks, 52-week heatmap, daily trends and model breakdown.",
   "type": "module",
   "main": "lib/index.js",
