@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.5.8
+
+- Make refresh update the whole page (stats strip, heatmap, trend, models, sessions and footer).
+- Show a lightweight retry line when refresh or range loading fails; add retry to the initial failure state.
+- Add token composition (input / output / cache read) to every session ranking row.
+- Explain the partial historical cost: source (`billing` / `cost-meter`) plus covered days.
+- Show how many days in the current range have no records.
+- Persist hidden model legend selections in `localStorage`.
+- Add native `title` to session titles, enlarge pager touch targets, and count loading seconds.
+- Add a cross-midnight test to keep local-day bucketing stable.
+
 ## 0.5.7
 
 - Cache the merged session data in memory; when no session file changed, repeat API requests

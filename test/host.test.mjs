@@ -92,3 +92,39 @@ test('computeStats keeps totals, cache hit rate and all-time range consistent', 
   assert.equal(all.dayList.at(-1).date, key);
   assert.ok(all.dayList.length >= 1);
 });
+
+test('computeStats buckets messages crossing midnight by local day', () => {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const yesterday = new Date(today);
+  yesterday.setDate(today.getDate() - 1);
+  const late = new Date(yesterday);
+  late.setHours(23, 59, 0, 0);
+  const early = new Date(today);
+  early.setHours(0, 1, 0, 0);
+  const yesterdayKey = dayKey(yesterday);
+  const todayKey = dayKey(today);
+
+  const data = {
+    byDay: {
+      [yesterdayKey]: { totalTokens: 10, calls: 1 },
+      [todayKey]: { totalTokens: 20, calls: 1 }
+    },
+    byModel: {},
+    sessions: {
+      'session-midnight': {
+        title: 'Midnight',
+        spanMs: 0,
+        messages: [
+          { time: late.getTime(), model: 'deepseek-test', totalTokens: 10 },
+          { time: early.getTime(), model: 'deepseek-test', totalTokens: 20 }
+        ]
+      }
+    }
+  };
+
+  const stats = computeStats(data, 7);
+  assert.equal(stats.dayModels[yesterdayKey]['deepseek-test'], 10);
+  assert.equal(stats.dayModels[todayKey]['deepseek-test'], 20);
+  assert.equal(stats.sessionsRanking[0].tokens, 30);
+});
