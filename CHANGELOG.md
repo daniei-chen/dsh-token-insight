@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.5.7
+
+- Cache the merged session data in memory; when no session file changed, repeat API requests
+  skip the merge step (about 35ms instead of seconds).
+- Cache the legacy billing / ledger merge by file mtime, and reset `cost` when those files disappear.
+- Warm up the scan 2s after host start instead of 15s.
+
 ## 0.5.6
 
 - Scope the session ranking to the selected range (7 days / 30 days / all).

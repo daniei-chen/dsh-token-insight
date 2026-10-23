@@ -9,7 +9,7 @@
 DeepSeek Harness（DSH）的本地使用统计插件：累计/峰值 Token、连续天数、52 周热力图、
 每日趋势、模型用量、会话排行、成本与缓存命中。
 
-[![version](https://img.shields.io/badge/version-0.5.6-4C8DFF?style=flat-square)](CHANGELOG.md)
+[![version](https://img.shields.io/badge/version-0.5.7-4C8DFF?style=flat-square)](CHANGELOG.md)
 [![DSH](https://img.shields.io/badge/DSH-0.2.1--rc.2%2B-22C55E?style=flat-square)](https://github.com/daniei-chen/DeepSeek-Harness-APP)
 [![Node](https://img.shields.io/badge/Node-24-339933?style=flat-square&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
 [![license](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](LICENSE)
@@ -28,7 +28,7 @@ DSH Token Insight 是一个装在 **DSH host** 上的本地插件。安装后，
 
 - 数据只来自本机 `~/.dsh`，不联网、不上传、不需要账号或 API key
 - 直接解析当前版本的 `session.v4.jsonl.zstd`，不是估算
-- 增量扫描 + SQLite 缓存，第二次打开很快
+- 增量扫描 + SQLite 缓存；内存命中时约 35ms，文件没变不会重复合并会话
 - 明确标注数据覆盖范围，缺档时不会把“没记录”误看成“没使用”
 
 > **给 AI / For AI agents：** 先读
@@ -39,7 +39,7 @@ DSH Token Insight 是一个装在 **DSH host** 上的本地插件。安装后，
 
 ![使用统计面板](docs/screenshot.png)
 
-> 桌面端截图（0.5.1）；0.5.2 起移除导出和日预算，0.5.3 把版本提示移到底部，0.5.4 把数据覆盖和今日/本周信息也移到底部，0.5.5 给刷新按钮加了旋转加载态并上移了加载文案，0.5.6 增加会话排行和翻页。手机端 52 周热力图比屏幕宽，**可左右滑动**，并会自动定位到最近几周。
+> 桌面端截图（0.5.1）；0.5.2 起移除导出和日预算，0.5.3 把版本提示移到底部，0.5.4 把数据覆盖和今日/本周信息也移到底部，0.5.5 给刷新按钮加了旋转加载态并上移了加载文案，0.5.6 增加会话排行和翻页，0.5.7 加了内存缓存。手机端 52 周热力图比屏幕宽，**可左右滑动**，并会自动定位到最近几周。
 
 ## 功能一览
 
@@ -79,7 +79,7 @@ node scripts/install.mjs --profile desktop
 
 **GitHub Release 下载：**
 
-[dsh-token-insight-0.5.6.tgz](https://github.com/daniei-chen/dsh-token-insight/releases/download/v0.5.6/dsh-token-insight-0.5.6.tgz)
+[dsh-token-insight-0.5.7.tgz](https://github.com/daniei-chen/dsh-token-insight/releases/download/v0.5.7/dsh-token-insight-0.5.7.tgz)
 
 在 DSH 插件管理器里选择这个 tgz，或解压到
 `~/.dsh/profiles/desktop/node_modules/dsh-token-insight`。
@@ -328,6 +328,7 @@ dsh-token-insight/
 - [x] 0.5.4：数据覆盖和今日/本周信息移到底部，加载态改为居中的「正在统计模型使用」
 - [x] 0.5.5：刷新按钮增加旋转加载态，加载文案上移到视觉中心
 - [x] 0.5.6：会话排行按范围统计，支持「查看全部」和 10 条/页翻页
+- [x] 0.5.7：内存缓存合并结果，无变化时热请求约 35ms；预热提前到 2s
 - [ ] 0.6：真实成本账本（按模型单价、缓存节省）
 - [ ] 0.6：会话下钻（点击 Top 5 / 峰值日期看明细）
 - [ ] 0.6：今日常驻小部件（侧边栏 / 桌宠气泡）
