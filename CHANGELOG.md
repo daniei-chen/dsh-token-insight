@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.5.3
+
+- Move the client / host version mismatch notice to the very bottom of the page.
+- Make the notice subtle and self-explanatory; remove the separate `全部` range warning banner.
+- Keep refresh and range switching silent while the local scan runs.
+- Change the cold-start hint to say it may take a few minutes.
+
 ## 0.5.2
 
 - Remove the CSV / JSON / PNG export buttons; the dashboard is read-only again.

@@ -9,7 +9,7 @@
 DeepSeek Harness（DSH）的本地使用统计插件：累计/峰值 Token、连续天数、52 周热力图、
 每日趋势、模型用量、会话 Top 5、成本与缓存命中。
 
-[![version](https://img.shields.io/badge/version-0.5.2-4C8DFF?style=flat-square)](CHANGELOG.md)
+[![version](https://img.shields.io/badge/version-0.5.3-4C8DFF?style=flat-square)](CHANGELOG.md)
 [![DSH](https://img.shields.io/badge/DSH-0.2.1--rc.2%2B-22C55E?style=flat-square)](https://github.com/daniei-chen/DeepSeek-Harness-APP)
 [![Node](https://img.shields.io/badge/Node-24-339933?style=flat-square&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
 [![license](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](LICENSE)
@@ -39,7 +39,7 @@ DSH Token Insight 是一个装在 **DSH host** 上的本地插件。安装后，
 
 ![使用统计面板](docs/screenshot.png)
 
-> 桌面端截图（0.5.1）；0.5.2 已移除底部导出按钮和日预算输入，界面更简洁。手机端 52 周热力图比屏幕宽，**可左右滑动**，并会自动定位到最近几周。
+> 桌面端截图（0.5.1）；0.5.2 起已移除底部导出按钮和日预算输入，0.5.3 把版本提示移到了页面底部。手机端 52 周热力图比屏幕宽，**可左右滑动**，并会自动定位到最近几周。
 
 ## 功能一览
 
@@ -79,7 +79,7 @@ node scripts/install.mjs --profile desktop
 
 **GitHub Release 下载：**
 
-[dsh-token-insight-0.5.2.tgz](https://github.com/daniei-chen/dsh-token-insight/releases/download/v0.5.2/dsh-token-insight-0.5.2.tgz)
+[dsh-token-insight-0.5.3.tgz](https://github.com/daniei-chen/dsh-token-insight/releases/download/v0.5.3/dsh-token-insight-0.5.3.tgz)
 
 在 DSH 插件管理器里选择这个 tgz，或解压到
 `~/.dsh/profiles/desktop/node_modules/dsh-token-insight`。
@@ -216,7 +216,7 @@ node -e "console.log(require.resolve('dsh-token-insight/client'))"
 # 2. API 正常（端口换成 DSH Web GUI 端口）
 curl "http://127.0.0.1:<port>/usage-stats/api?days=30"
 
-# 3. 全部范围（0.5.2 新 host）
+# 3. 全部范围（0.5.2+ 新 host）
 curl "http://127.0.0.1:<port>/usage-stats/api?days=all"
 ```
 
@@ -324,6 +324,7 @@ dsh-token-insight/
 - [x] 0.5.0：全部范围、数据覆盖、缓存命中、会话 Top 5、导出、预算、SQLite 缓存
 - [x] 0.5.1：tooltip 挂 body，兼容 Catppuccin glass 等会 transform 弹窗的主题
 - [x] 0.5.2：移除导出和日预算，保留刷新，界面更专注
+- [x] 0.5.3：版本提示移到底部，加载文案改为几分钟，刷新静默处理
 - [ ] 0.6：真实成本账本（按模型单价、缓存节省）
 - [ ] 0.6：会话下钻（点击 Top 5 / 峰值日期看明细）
 - [ ] 0.6：今日常驻小部件（侧边栏 / 桌宠气泡）
