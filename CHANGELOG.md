@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.5.10
+
+- Use the theme blue for selected heatmap cells, range buttons, trend crosshair, shaded column, axis label and dots.
+- Model usage now focuses: click a legend row or ring segment to show only that model;「显示全部」restores all models.
+- Refresh the injected stylesheet instead of skipping injection, so the loading spinner and new rules appear after hot reload.
+
 ## 0.5.9
 
 - Default the panel to the last 7 days instead of 30.
