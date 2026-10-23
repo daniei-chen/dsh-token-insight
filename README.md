@@ -9,7 +9,7 @@
 DeepSeek Harness（DSH）的本地使用统计插件：累计/峰值 Token、连续天数、52 周热力图、
 每日趋势、模型用量、会话 Top 5、成本与缓存命中。
 
-[![version](https://img.shields.io/badge/version-0.5.4-4C8DFF?style=flat-square)](CHANGELOG.md)
+[![version](https://img.shields.io/badge/version-0.5.5-4C8DFF?style=flat-square)](CHANGELOG.md)
 [![DSH](https://img.shields.io/badge/DSH-0.2.1--rc.2%2B-22C55E?style=flat-square)](https://github.com/daniei-chen/DeepSeek-Harness-APP)
 [![Node](https://img.shields.io/badge/Node-24-339933?style=flat-square&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
 [![license](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](LICENSE)
@@ -39,7 +39,7 @@ DSH Token Insight 是一个装在 **DSH host** 上的本地插件。安装后，
 
 ![使用统计面板](docs/screenshot.png)
 
-> 桌面端截图（0.5.1）；0.5.2 起移除导出和日预算，0.5.3 把版本提示移到底部，0.5.4 把数据覆盖和今日/本周信息也移到底部。手机端 52 周热力图比屏幕宽，**可左右滑动**，并会自动定位到最近几周。
+> 桌面端截图（0.5.1）；0.5.2 起移除导出和日预算，0.5.3 把版本提示移到底部，0.5.4 把数据覆盖和今日/本周信息也移到底部，0.5.5 给刷新按钮加了旋转加载态并上移了加载文案。手机端 52 周热力图比屏幕宽，**可左右滑动**，并会自动定位到最近几周。
 
 ## 功能一览
 
@@ -52,7 +52,7 @@ DSH Token Insight 是一个装在 **DSH host** 上的本地插件。安装后，
 | **数据覆盖** | 实际起止日期；今日、本周、缓存命中率（页面底部） |
 | **会话 Top 5** | 会话标题、Token、时长；快速看出谁最“费 token” |
 | **历史计费** | 从旧 `web-billing` / `cost-meter` 补出部分费用，并标注“部分” |
-| **刷新** | 手动重新扫描本地会话；进入页面和切换范围时也会自动加载 |
+| **刷新** | 手动重新扫描本地会话；点击后图标旋转并显示「正在读取…」；进入页面和切换范围时也会自动加载 |
 | **主题适配** | 跟随 DSH 深色/浅色主题；手机端横向滚动 |
 
 ## 快速开始
@@ -79,7 +79,7 @@ node scripts/install.mjs --profile desktop
 
 **GitHub Release 下载：**
 
-[dsh-token-insight-0.5.4.tgz](https://github.com/daniei-chen/dsh-token-insight/releases/download/v0.5.4/dsh-token-insight-0.5.4.tgz)
+[dsh-token-insight-0.5.5.tgz](https://github.com/daniei-chen/dsh-token-insight/releases/download/v0.5.5/dsh-token-insight-0.5.5.tgz)
 
 在 DSH 插件管理器里选择这个 tgz，或解压到
 `~/.dsh/profiles/desktop/node_modules/dsh-token-insight`。
@@ -147,7 +147,7 @@ flowchart LR
 4. **每日 Token 趋势图**：按模型分色，图例可点击隐藏
 5. **模型用量**：环形图 + 明细列表
 6. **会话用量 Top 5**：按会话看 Token 和时长
-7. **刷新**：手动重新读取本地统计
+7. **刷新**：手动重新读取本地统计，点击后图标旋转并显示「正在读取…」
 8. **页面底部**：数据覆盖（`2026-08-13 ~ 2026-10-23 · 本地会话`）、今日 / 本周 / 缓存命中 / 历史计费；host 版本不一致提示也在这里
 
 ## 数据流
@@ -325,6 +325,7 @@ dsh-token-insight/
 - [x] 0.5.2：移除导出和日预算，保留刷新，界面更专注
 - [x] 0.5.3：版本提示移到底部，加载文案改为几分钟，刷新静默处理
 - [x] 0.5.4：数据覆盖和今日/本周信息移到底部，加载态改为居中的「正在统计模型使用」
+- [x] 0.5.5：刷新按钮增加旋转加载态，加载文案上移到视觉中心
 - [ ] 0.6：真实成本账本（按模型单价、缓存节省）
 - [ ] 0.6：会话下钻（点击 Top 5 / 峰值日期看明细）
 - [ ] 0.6：今日常驻小部件（侧边栏 / 桌宠气泡）

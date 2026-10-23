@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.5.5
+
+- Add a spinning「↻」icon and「正在读取…」label to the refresh button while a scan is running.
+- Raise the centered cold-start message by `10vh` so it sits in the visual center of the panel.
+
 ## 0.5.4
 
 - Move the data coverage and today / week / cache-hit summary to the page footer.
