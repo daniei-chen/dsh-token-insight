@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.5.4
+
+- Move the data coverage and today / week / cache-hit summary to the page footer.
+- Replace the skeleton loading state with a centered「正在统计模型使用」message,
+  so the loading hint no longer sits below tall placeholder blocks.
+- Keep the footer version notice directly below the summary.
+
 ## 0.5.3
 
 - Move the client / host version mismatch notice to the very bottom of the page.
