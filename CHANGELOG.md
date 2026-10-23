@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.5.12
+
+- Move the instant-render snapshot cache from `sessionStorage` to `localStorage`,
+  so it survives a DSH restart.
+- Keep the background refresh and the「更新中…」footer hint.
+
 ## 0.5.11
 
 - Render the last statistics instantly from `sessionStorage`, then refresh in the background.
